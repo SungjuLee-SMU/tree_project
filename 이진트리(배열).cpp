@@ -11,7 +11,6 @@ node Mytree[MAXNODE];
 
 
 void Traverse(int i) {
-    
     if (strcmp(Mytree[i].Name, "UnUsed") == 0){
         cout << Mytree[i].Name << endl;
         if (Mytree[i].LChild != -1) {
