@@ -139,7 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="이진트리(배열).cpp" />
+    <ClCompile Include="이진트리(배열).cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="이진탐색트리%28포인터%29.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="이진탐색트리 포인터.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
