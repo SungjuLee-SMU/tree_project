@@ -110,7 +110,10 @@ Nptr Insert(Nptr T, int Key)
 
 Nptr create(int S[]) {
 	Nptr Root = NULL;
-
+	Root = (Nptr)malloc(sizeof(*Root));
+	Root->LChild = NULL;
+	Root->RChild = NULL;
+	Root->Data = *S;
 	return Root;
 }
 
