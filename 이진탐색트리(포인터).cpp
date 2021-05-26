@@ -1,44 +1,116 @@
 #include "이진탐색트리 포인터.h"
 #define SN 10;
 
+void Visit(int Data) {
+	cout << Data << ' ' << endl;
+}
+
 Nptr Search(Nptr T, int Key)
 {
-
+	if (T == NULL) {
+		cout << "No Such Node";
+		return T;
+	}
+	else if (T->Data == Key)
+		return T;
+	else if (T->Data > Key)
+		return Search(T->LChild, Key);
+	else
+		return Search(T->RChild, Key);
 }
+
 void PreOrder(Nptr T)
 {
-
+	if (T != NULL) {
+		Visit(T->Data);
+		PreOrder(T->LChild);
+		PreOrder(T->RChild);
+	}
 }
 
 void InOrder(Nptr T)
 {
-
+	if (T != NULL) {
+		PreOrder(T->LChild);
+		Visit(T->Data);
+		PreOrder(T->RChild);
+	}
 }
 
 void PostOrder(Nptr T)
 {
-
+	if (T != NULL) {
+		PreOrder(T->LChild);
+		PreOrder(T->RChild);
+		Visit(T->Data);
+	}
 }
 
 void SuccessorCopy(Nptr &T, int& Key)
 {
-
+	if (T->LChild == NULL) {
+		Key = T->Data;
+		Nptr Temp = T;
+		T = T->RChild;
+		delete Temp;
+	}
+	else
+		SuccessorCopy(T->LChild, Key);
 }
 
 
-void Delete(Nptr &T, int Key)
+void Delete(Nptr& T, int Key)
 {
-
+	if (T == NULL)
+		cout << "No Record with Such Key";
+	else if (T->Data > Key)
+		Delete(T->LChild, Key);
+	else if (T->Data < Key)
+		Delete(T->RChild, Key);
+	else if (T->Data == Key) {
+		if ((T->LChild == NULL) && (T->RChild == NULL)) {
+			Nptr Temp = T;
+			T = NULL;
+			delete Temp;
+		}
+		else if (T->LChild == NULL) {
+			Nptr Temp = T;
+			T = T->RChild;
+			delete Temp;
+		}
+		else if (T->RChild == NULL) {
+			Nptr Temp = T;
+			T = T->LChild;
+			delete Temp;
+		}
+		else
+			SuccessorCopy(T->RChild, T->Data);
+	}
 }
 
 
 Nptr Insert(Nptr T, int Key)
 {
-
+	if (T == NULL) {
+		T = new node;
+		T->Data = Key;
+		T->LChild = NULL;
+		T->RChild = NULL;
+	}
+	else if (T->Data > Key)
+		T->LChild = Insert(T->LChild, Key);
+	else
+		T->RChild = INsert(T->RChild, Key);
+	return T;
 }
 
 Nptr create(int S[]) {
-
+	Nptr Root = NULL;
+	Root = Insert(Root, S[0]);
+	for (int i = 1; i < 10; i++) {
+		Insert(Root, S[i]);
+	}
+	return Root;
 }
 
 int main() {
