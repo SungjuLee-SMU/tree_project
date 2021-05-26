@@ -1,124 +1,161 @@
-#include "이진탐색트리 포인터.h"
-#define SN 10;
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
 
-Nptr Search(Nptr T, int Key)
+using namespace std;
+
+typedef struct node {
+	int data;
+	struct node* rightChild;
+	struct node* leftChild;
+}Node;
+
+typedef Node* treePointer;
+
+treePointer Search(treePointer T, int Key);
+treePointer Insert(treePointer T, int Key);
+treePointer Create(int S[]);
+void print(treePointer T);
+void PreOrder(treePointer T);
+void InOrder(treePointer T);
+void PostOrder(treePointer T);
+void SuccessorCopy(treePointer& T, int& Key);
+void Delete(treePointer& T, int Key);
+
+
+
+treePointer Search(treePointer T, int Key)
+{
+	if (T == NULL)
+		printf("오류");
+	else if (T->data == Key)
+		return T;
+	else if (T->data > Key)
+		return Search(T->leftChild, Key);
+
+	else
+		return Search(T->rightChild, Key);
+}
+
+treePointer Insert(treePointer T, int Key)
 {
 	if (T == NULL) {
-		printf("No Such Node");
-		return T;
-	}
-	else if (T->Data == Key)
-		return T;
-	else if (T->Data > Key)
-		return Search(T->LChild, Key);
-	else
-		return Search(T->RChild, Key);
-}
-void PreOrder(Nptr T)
-{
-	if (T != NULL)
-	{
-		cout << T->Data << endl;
-		PreOrder(T->LChild);
-		PreOrder(T->RChild);
-	}
-}
-
-void InOrder(Nptr T)
-{
-	if (T != NULL)
-	{
-		InOrder(T->LChild);
-		cout << T->Data << endl;
-		InOrder(T->RChild);
-	}
-}
-
-void PostOrder(Nptr T)
-{
-	if (T != NULL)
-	{
-		PostOrder(T->LChild);		
-		PostOrder(T->RChild);
-		cout << T->Data << endl;
-	}
-}
-
-void SuccessorCopy(Nptr &T, int& Key)
-{
-	if (T->LChild == NULL)
-	{ 
-		Key = T->Data;
-		Nptr Temp = T;
-		T = T->RChild;
-		delete Temp;
-	}
-	else
-		SuccessorCopy(T->LChild, Key);
-}
-
-
-void Delete(Nptr &T, int Key)
-{
-	if (T == NULL)
-		printf("No Record with Such Key");
-	else if (T->Data > Key)
-		Delete(T->LChild, Key);
-	else if (T->Data < Key)
-		Delete(T->RChild, Key);
-	else if (T->Data == Key)
-	{ 
-		if ((T->LChild == NULL) && (T->RChild == NULL))
-		{
-			Nptr Temp = T; 
-			T = NULL; 
-			delete Temp;
-		}
-		else if (T->LChild == NULL)
-		{
-			Nptr Temp = T; 
-			T = T->RChild; 
-			delete Temp;
-		}
-		else if (T->RChild == NULL)
-		{
-			Nptr Temp = T; 
-			T = T->LChild; 
-			delete Temp;
-		}
-		else
-		   SuccessorCopy(T->RChild, T->Data);
-	}
-}
-
-
-Nptr Insert(Nptr T, int Key)
-{
-	if (T == NULL)
-	{
 		T = new node;
-		T->Data = Key;
-		T->LChild = NULL; 
-		T->RChild = NULL;
+		T->data = Key;
+		T->leftChild = NULL;
+		T->rightChild = NULL;
 	}
-	else if (T->Data > Key)
-		T->LChild = Insert(T->LChild, Key);
-	else
-		T->RChild = Insert(T->RChild, Key);
+	else if (T->data > Key) {
+		T->leftChild = Insert(T->leftChild, Key);
+	}
+	else {
+		T->rightChild = Insert(T->rightChild, Key);
+	}
 	return T;
 }
 
-Nptr create(int S[]) {
-	Nptr Root = NULL;
 
-	return Root;
+treePointer Create(int S[]) {
+	treePointer root = NULL;
+	root = Insert(root, S[0]);
+	for (int i = 0; i < 10; i++) {
+		Insert(root, S[i]);
+	}
+
+	return root;
 }
 
-int main() {
-	Nptr BT=NULL;
-	int S[10] = {6,4,8,3,5,7,9,1,2,10};
 
-	BT = create(S);
+void print(treePointer T) {
+	if (T == NULL)
+		return;
+	printf("%d ", T->data);
+	print(T->leftChild);
+	print(T->rightChild);
+}
+
+void PreOrder(treePointer T)
+{
+	if (T != NULL) {
+		return;
+	}
+	printf("%d ", T->data);
+	print(T->leftChild);
+	print(T->rightChild);
+}
+
+void InOrder(treePointer T)
+{
+	if (T != NULL) {
+		return;
+	}
+	print(T->leftChild);
+	printf("%d ", T->data);
+	print(T->rightChild);
+}
+
+void PostOrder(treePointer T)
+{
+	if (T != NULL) {
+		return;
+	}
+	print(T->leftChild);
+	print(T->rightChild);
+	printf("%d ", T->data);
+}
+
+void SuccessorCopy(treePointer& T, int& Key)
+{
+	if (T->leftChild == NULL) {
+		Key = T->data;
+		treePointer Temp = T;
+		T = T->rightChild;
+		delete Temp;
+	}
+	else
+		SuccessorCopy(T->leftChild, Key);
+}
+
+
+void Delete(treePointer& T, int Key)
+{
+	if (T == NULL)
+		printf("오류");
+	else if (T->data > Key)
+		Delete(T->leftChild, Key);
+	else if (T->data < Key)
+		Delete(T->rightChild, Key);
+	else if (T->data == Key) {
+		if ((T->leftChild == NULL) && (T->rightChild == NULL)) {
+			treePointer Temp = T;
+			T = NULL;
+			delete Temp;
+		}
+		else if (T->leftChild == NULL) {
+			treePointer Temp = T;
+			T = T->rightChild;
+			delete Temp;
+		}
+		else if (T->rightChild == NULL) {
+			treePointer Temp = T;
+			T = T->leftChild;
+			delete Temp;
+		}
+		else
+			SuccessorCopy(T->rightChild, T->data);
+	}
+}
+
+
+
+
+
+
+int main() {
+	treePointer BT = NULL;
+	int S[10] = { 6,4,8,3,5,7,9,1,2,10 };
+
+	BT = Create(S);
 	PreOrder(BT);
 	cout << endl;
 
