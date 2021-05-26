@@ -1,153 +1,56 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h> 
+#define MAX 100 
 
-typedef struct TreeNode {
-    int key;
-    struct TreeNode *left, *right;
-} TreeNode;
+typedef struct{ 
+    char name[50];
+    int left;
+    int right;
+} node;
 
-TreeNode* search(TreeNode *node, int key)
-{
-    /*Binary Search*/
-    if(node == NULL) return NULL;
-    if(node->key == key) return node;
-    else if(node->key > key)
-        return search(node->left, key);
-    else
-        return search(node->right, key);
-}
-
-TreeNode* Create(int item)
-{
-    TreeNode *temp = (TreeNode *)malloc(sizeof(TreeNode));
-    temp->key = item;
-    temp->left = temp->right = NULL;
-    return temp;
-}
-
-TreeNode* insert_node(TreeNode *node, int key)
-{
-    if(node == NULL) return Create(key);
-    
-    if(key < node->key)
-        node->left = insert_node(node->left, key);
-    else if(key > node->key)
-        node->right = insert_node(node->right, key);
-    
-    return node;
-}
-
-TreeNode* max_value_node(TreeNode *node)
-{
-    TreeNode *curr = node;
-    
-    while(curr->right != NULL)
-        curr = curr->right;
-    return curr;
-}
-
-TreeNode* min_value_node(TreeNode *node)
-{
-    TreeNode *curr = node;
-    
-    while(curr->left != NULL)
-        curr = curr->left;
-    return curr;
-}
-
-TreeNode* delete_node(TreeNode *root, int key)
-{
-    if(root == NULL) return NULL;
-    
-    if(key < root->key)
-        root->left = delete_node(root->left, key);
-    else if(key > root->key)
-        root->right = delete_node(root->right, key);
-    else
-    {
-        //leaf node
-        if(root->left == NULL)
-        {
-            TreeNode *temp = root->right;
-            free(root);
-            return temp;
-        }
-        else if(root->right == NULL)
-        {
-            TreeNode *temp = root->left;
-            free(root);
-            return temp;
-        }
-        //parent node
-        TreeNode *temp = min_value_node(root->right);
-        
-        root->key = temp->key;
-        root->right = delete_node(root->right, temp->key);
-    }
-    return root;
-}
-
-/*TreeNode* Traverse(TreeNode *root, int key) {
-    
-    if (strcmp(node, "UnUsed") == 0) {
-    	printf("%d", node);
-    	printf("\n");
+void Create(node tree[MAX]) {
+    for (int i = 0; i < MAX; i++) {
     	
-        if (root->left != -1) {
-            Traverse(root->left);
-        }
-        if (root->right != -1) {
-            Traverse(root->right);
-        }
+        strcpy(tree[i].name, "UnUsed");
+        
+        tree[i].left = -1;
+        tree[i].right = -1;
     }
-}*/
 
-TreeNode* Destroy(TreeNode *node) {
-	if(node->left != NULL)
-        node->left = Destroy(node->left);
-        node->left = NULL;
-    if(node->right != NULL)
-        node->right = Destroy(node->right);
-        node->right = NULL;
+    strcpy(tree[0].name, "0");
+    tree[0].left = 1;
+    tree[0].right = 2;
     
-        if((node->left == NULL) && (node->right == NULL))
-        {
-            printf("destroy\n");
-            free(node);
-            node = NULL;
-            return node;
-        }
+    strcpy(tree[1].name, "1");
+    tree[1].left = 3;
+    tree[1].right = 4;
+    
+    strcpy(tree[2].name, "2");
+    tree[2].left = 5;
+    tree[2].right = 6;
     
 }
 
-TreeNode* IsEmpty(TreeNode *node) {
-	if(node == NULL) 
-		printf("IsEmpty\n");
-	else
-		printf("NoEmpty\n");
-}		
 
+void Traverse(int i, node tree[MAX]) {
+	
+    if (strcmp(tree[i].name, "사용하지않음") != 0) {
+    	printf("%s\n", tree[i].name);
+        
+        if (tree[i].left != -1) {
+            Traverse(tree[i].left, tree);
+        }
+        if (tree[i].right != -1) {
+            Traverse(tree[i].right, tree);
+        }
+    }
+}
 
-int main(int argc, const char * argv[]) {
-    TreeNode* root = NULL;
+int main() {
+    node tree[MAX];
     
-    IsEmpty(root);
-    
-    root = insert_node(root, 20);
-    root = insert_node(root, 10);
-    root = insert_node(root, 25);
-    root = insert_node(root, 5);
-    root = insert_node(root, 15);
-    root = insert_node(root, 30);
-    
-    IsEmpty(root);
+    Create(tree);
+    Traverse(0, tree);
 
-    if(search(root, 30))
-        printf("\nThere is %d\n", 30);
-    else
-        printf("\nThere isn't %d\n", 30);
-    
-    Destroy(root);
-    
     return 0;
 }
