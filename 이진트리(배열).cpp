@@ -3,6 +3,7 @@ using namespace std;
 #pragma warning(disable:4996)
 #define _CRT_SECURE_NO_WARNINGS 
 #define MAXNODE 100 
+
 typedef struct{ 
     char Name[50];
     int LChild;
@@ -21,24 +22,31 @@ void CreateTree(node Mytree[MAXNODE]) {
     strcpy(Mytree[0].Name, "±è");
     Mytree[0].LChild = 1;
     Mytree[0].RChild = 2;
+
     strcpy(Mytree[1].Name, "ÀÌ");
     Mytree[1].LChild = 3;
     Mytree[1].RChild = 4;
+    
     strcpy(Mytree[2].Name, "¹Ú");
     Mytree[2].LChild = 5;
     Mytree[2].RChild = 6;
+    
     strcpy(Mytree[3].Name, "ÃÖ");
     Mytree[3].LChild = 7;
     Mytree[3].RChild = -1;
+    
     strcpy(Mytree[4].Name, "Á¤");
     Mytree[4].LChild = -1;
     Mytree[4].RChild = -1;
+    
     strcpy(Mytree[5].Name, "°­");
     Mytree[5].LChild = -1;
     Mytree[5].RChild = -1;
+    
     strcpy(Mytree[6].Name, "Á¶");
     Mytree[5].LChild = -1;
     Mytree[5].RChild = -1;
+    
     strcpy(Mytree[7].Name, "À±");
     Mytree[5].LChild = -1;
     Mytree[5].RChild = -1;
