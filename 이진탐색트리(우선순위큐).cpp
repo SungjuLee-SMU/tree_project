@@ -128,6 +128,21 @@ int Dequeue(Qptr PQ) {
 	return tempData;
 }
 
+void Destroy1(Nptr T) {
+	if (T != NULL) {
+		Destroy1(T->LChild);
+		Destroy1(T->RChild);
+		free(T);
+	}
+}
+
+void Destroy2(Qptr Q) {
+	if (Q != NULL) {
+		Destroy2(Q->Root);
+		free(Q);
+	}
+}
+
 int main() {
 	Queue* PQ = NULL;
 	int Skey[10] = { 6,4,8,3,5,7,9,1,2,10 };
@@ -146,7 +161,7 @@ int main() {
 	Enqueue(PQ, 2, 30000);
 	Enqueue(PQ, 10, 100);
 
-	cout << "ÀüÀ§¼øÈ¸ " << endl;
+	cout << "전위순회 " << endl;
 	PreOrder(PQ->Root);
 	cout << endl;
 
@@ -161,7 +176,7 @@ int main() {
 	cout << Dequeue(PQ) << endl;
 	cout << Dequeue(PQ) << endl;
 
-	cout << "ÀüÀ§¼øÈ¸ " << endl;
+	cout << "전위순회 " << endl;
 	PreOrder(PQ->Root);
 	cout << endl;
 
