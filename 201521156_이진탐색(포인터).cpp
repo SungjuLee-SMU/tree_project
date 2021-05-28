@@ -113,6 +113,17 @@ Nptr create(int S[]) {
 	return root;
 }
 
+void Destroy(Nptr& T) {
+	if (T != NULL)
+	{
+		Destroy(T->LChild);
+		Destroy(T->RChild);
+		Nptr temp = T;
+		T = NULL;
+		delete temp;
+	}
+}
+
 int main() {
 	Nptr BT=NULL;
 	int S[10] = {6,4,8,3,5,7,9,1,2,10};
@@ -144,6 +155,16 @@ int main() {
 	cout << endl;
 
 	InOrder(BT);
+	cout << endl;
+
+	cout << "search 9 - ";
+	cout << Search(BT, 9);
+	cout << endl;
+
+	cout << "destroy";
+	Destroy(BT);
+	InOrder(BT);
+	delete BT;
 	cout << endl;
 
 	return 0;
