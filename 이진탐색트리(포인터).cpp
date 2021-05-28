@@ -1,10 +1,11 @@
-#include "ÀÌÁøÅ½»öÆ®¸® Æ÷ÀÎÅÍ.h"
+#include "ï¿½ï¿½ï¿½ï¿½Å½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.h"
 #define SN 10;
 
 Nptr Search(Nptr T, int Key)
 {
-	if (T == NULL) {
-		printf("No Such Node");
+	if (T == NULL)
+	{
+		cout << "No Such Node" << endl;
 		return T;
 	}
 	else if (T->Data == Key)
@@ -38,16 +39,16 @@ void PostOrder(Nptr T)
 {
 	if (T != NULL)
 	{
-		PostOrder(T->LChild);		
+		PostOrder(T->LChild);
 		PostOrder(T->RChild);
 		cout << T->Data << endl;
 	}
 }
 
-void SuccessorCopy(Nptr &T, int& Key)
+void SuccessorCopy(Nptr &T, int &Key)
 {
 	if (T->LChild == NULL)
-	{ 
+	{
 		Key = T->Data;
 		Nptr Temp = T;
 		T = T->RChild;
@@ -56,7 +57,6 @@ void SuccessorCopy(Nptr &T, int& Key)
 	else
 		SuccessorCopy(T->LChild, Key);
 }
-
 
 void Delete(Nptr &T, int Key)
 {
@@ -67,30 +67,29 @@ void Delete(Nptr &T, int Key)
 	else if (T->Data < Key)
 		Delete(T->RChild, Key);
 	else if (T->Data == Key)
-	{ 
+	{
 		if ((T->LChild == NULL) && (T->RChild == NULL))
 		{
-			Nptr Temp = T; 
-			T = NULL; 
+			Nptr Temp = T;
+			T = NULL;
 			delete Temp;
 		}
 		else if (T->LChild == NULL)
 		{
-			Nptr Temp = T; 
-			T = T->RChild; 
+			Nptr Temp = T;
+			T = T->RChild;
 			delete Temp;
 		}
 		else if (T->RChild == NULL)
 		{
-			Nptr Temp = T; 
-			T = T->LChild; 
+			Nptr Temp = T;
+			T = T->LChild;
 			delete Temp;
 		}
 		else
-		   SuccessorCopy(T->RChild, T->Data);
+			SuccessorCopy(T->RChild, T->Data);
 	}
 }
-
 
 Nptr Insert(Nptr T, int Key)
 {
@@ -98,7 +97,7 @@ Nptr Insert(Nptr T, int Key)
 	{
 		T = new node;
 		T->Data = Key;
-		T->LChild = NULL; 
+		T->LChild = NULL;
 		T->RChild = NULL;
 	}
 	else if (T->Data > Key)
@@ -108,45 +107,90 @@ Nptr Insert(Nptr T, int Key)
 	return T;
 }
 
-Nptr create(int S[]) {
-	Nptr Root = NULL;
-	Root = Insert(Root, S[0]);
-	for (int i = 1; i < 10; i++) {
-		Insert(Root, S[i]);
+Nptr create(int S[], Nptr T, int i)
+{
+	if (T == NULL)
+	{
+		Nptr T = new node;
+		T->Data = S[i];
+		T->LChild = NULL;
+		T->RChild = NULL;
+		return T;
 	}
-	return Root;
+
+	else if (T->Data > S[i])
+	{
+		T->LChild = create(S, T->LChild, i);
+		return T;
+	}
+
+	else
+	{
+		T->RChild = create(S, T->RChild, i);
+		return T;
+	}
 }
 
-int main() {
-	Nptr BT=NULL;
-	int S[10] = {6,4,8,3,5,7,9,1,2,10};
+void DestroyTree(Nptr T)
+{
+	if (T->LChild != NULL)
+	{
+		DestroyTree(T->LChild);
+	}
 
-	BT = create(S);
-	PreOrder(BT);
-	cout << endl;
+	if (T->RChild != NULL)
+	{
+		DestroyTree(T->RChild);
+	}
 
-	InOrder(BT);
-	cout << endl;
+	T = NULL;
+	T->LChild = NULL;
+	T->RChild = NULL;
 
-	PostOrder(BT);
-	cout << endl;
+	free(T);
+}
 
-	Delete(BT, 10);
-	PreOrder(BT);
-	cout << endl;
+int main()
+{
+	int S[10] = {6, 4, 8, 3, 5, 7, 9, 1, 2, 10};
+	int length = sizeof(S) / sizeof(S[0]);
 
-	Delete(BT, 9);
-	PreOrder(BT);
-	cout << endl;
+	Nptr BT = new node;
+	BT->Data = S[0];
+	BT->LChild = NULL;
+	BT->RChild = NULL;
 
-	Delete(BT, 1);
-	PreOrder(BT);
-	cout << endl;
+	for (int i = 1; i < length; i++)
+	{
+		BT = create(S, BT, i);
+	}
 
-	Delete(BT, 5);
-	PreOrder(BT);
-	cout << endl;
+	// PreOrder(BT);
+	// cout << endl;
 
+	// InOrder(BT);
+	// cout << endl;
+
+	// PostOrder(BT);
+	// cout << endl;
+
+	// Delete(BT, 4);
+	// PreOrder(BT);
+	// cout << endl;
+
+	// Delete(BT, 9);
+	// PreOrder(BT);
+	// cout << endl;
+
+	// Delete(BT, 1);
+	// PreOrder(BT);
+	// cout << endl;
+
+	// Delete(BT, 5);
+	// PreOrder(BT);
+	// cout << endl;
+
+	DestroyTree(BT);
 	InOrder(BT);
 	cout << endl;
 
