@@ -1,4 +1,4 @@
-#include "����Ž��Ʈ�� ������.h"
+#include "이진탐색트리 포인터.h"
 #define SN 10;
 
 Nptr Search(Nptr T, int Key)
