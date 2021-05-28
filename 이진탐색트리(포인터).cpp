@@ -110,7 +110,10 @@ Nptr Insert(Nptr T, int Key)
 
 Nptr create(int S[]) {
 	Nptr Root = NULL;
-
+	Root = Insert(Root, S[0]);
+	for (int i = 1; i < 10; i++) {
+		Insert(Root, S[i]);
+	}
 	return Root;
 }
 
