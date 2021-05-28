@@ -57,10 +57,36 @@ void Traverse(int i, node Mytree[MAXNODE]) {
     }
 }
 
+bool search(node Mytree[MAXNODE], char ch_name) {
+    
+    int i;
+    i = 0;
+
+    while (strcmp(Mytree[i].Name, "UnUsed") != 0) {
+        if (*Mytree[i].Name == ch_name)
+            return true;
+        i++;
+    }
+    return false;
+}
+
+void Destroy(node* Mytree) {
+    for (int i = 0; i < MAXNODE; i++) {
+        strcpy(Mytree[i].Name, "UnUsed");
+        Mytree[i].LChild = -1;
+        Mytree[i].RChild = -1;
+    }
+}
+
 int main() {
+
     node Mytree[MAXNODE];
     CreateTree(Mytree);
     Traverse(0, Mytree);
+
+    cout << search(Mytree, '°­');
+
+    Destroy(&Mytree[0]);
 
     return 0;
 }
