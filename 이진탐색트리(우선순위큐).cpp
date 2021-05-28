@@ -1,6 +1,62 @@
 #include "이진탐색트리 포인터.h"
 #define SN 10;
 
+void PreOrder(Nptr T)
+{
+	if (T != NULL)
+	{
+		cout << T->Data << endl;
+		PreOrder(T->LChild);
+		PreOrder(T->RChild);
+	}
+}
+
+void SuccessorCopy(Nptr &T, int& Key)
+{
+	if (T->LChild == NULL)
+	{ 
+		Key = T->Data;
+		Nptr Temp = T;
+		T = T->RChild;
+		delete Temp;
+	}
+	else
+		SuccessorCopy(T->LChild, Key);
+}
+
+
+void Delete(Nptr &T, int Key)
+{
+	if (T == NULL)
+		printf("No Record with Such Key");
+	else if (T->key > Key)
+		Delete(T->LChild, Key);
+	else if (T->key < Key)
+		Delete(T->RChild, Key);
+	else if (T->key == Key)
+	{ 
+		if ((T->LChild == NULL) && (T->RChild == NULL))
+		{
+			Nptr Temp = T; 
+			T = NULL; 
+			delete Temp;
+		}
+		else if (T->LChild == NULL)
+		{
+			Nptr Temp = T; 
+			T = T->RChild; 
+			delete Temp;
+		}
+		else if (T->RChild == NULL)
+		{
+			Nptr Temp = T; 
+			T = T->LChild; 
+			delete Temp;
+		}
+		else
+		   SuccessorCopy(T->RChild, T->key);
+	}
+}
 
 
 Nptr Insert(Nptr T, int Key, int Data)
@@ -20,7 +76,17 @@ Nptr Insert(Nptr T, int Key, int Data)
 	return T;
 }
 
-
+int LengthQueue(Nptr T) {
+	int count = 0;
+	if (T != NULL)
+	{
+		count++;
+		cout << T->Data << endl;
+		PreOrder(T->LChild);
+		PreOrder(T->RChild);
+	}
+	return count;
+}
 
 Qptr MakePriorityQueue() {
 
@@ -36,23 +102,30 @@ void Enqueue(Qptr PQ, int key, int Data) {
 		PQ->Root = Insert(PQ->Root, key, Data);
 		PQ->Length++;
 	}
-	else Insert(PQ->Root, key, Data);
+	else {
+		Insert(PQ->Root, key, Data);
+		PQ->Length++;
+	}
 }
 
 Nptr MinTree(Nptr T) {
 	Nptr temp = T;
 	while (temp->LChild != NULL)
 		temp = temp->LChild;
-
 	return temp;
 
 }
-
-int Dequeue(Nptr& T) {
-	int min = 0;
-	min = MinTree(T)->key;
-	Delete(T, min);
-	return (T)->Data;
+int Dequeue(Qptr PQ) {
+	Nptr min;
+	int tempKey = 0;
+	int tempData = 0;
+	
+	min = MinTree(PQ->Root);
+	tempKey = min->key;
+	tempData = min->Data;
+	Delete(PQ->Root, min->key);
+	PQ->Length--;
+	return tempData;
 }
 
 int main() {
@@ -69,11 +142,28 @@ int main() {
 	Enqueue(PQ, 5,50);
 	Enqueue(PQ, 7,70);
 	Enqueue(PQ, 9,90);
-	Enqueue(PQ, 1,10);
-	Enqueue(PQ, 2,20);
+	Enqueue(PQ, 1,20000);
+	Enqueue(PQ, 2,30000);
 	Enqueue(PQ, 10,100);
-//	cout << Dequeue(PQ->Root);
-//	cout << Dequeue(PQ->Root);
+
+	cout << "전위순회 " << endl;
+	PreOrder(PQ->Root);
+	cout << endl;
+
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	cout << Dequeue(PQ) << endl;
+	
+	cout << "전위순회 "<< endl;
+	PreOrder(PQ->Root);
+	cout << endl;
 
 
 	return 0;
