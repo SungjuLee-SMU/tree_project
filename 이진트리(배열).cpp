@@ -44,6 +44,29 @@ void CreateTree(node Mytree[MAXNODE]) {
     Mytree[5].RChild = -1;
 }
 
+void Destory(node Mytree[MAXNODE]) {
+    for (int i = 0;i < MAXNODE;i++) {
+        strcpy(Mytree[i].Name, "UnUsed");
+        Mytree[i].LChild = -1;
+        Mytree[i].RChild = -1;
+    }
+}
+
+int IsEmpty(node Mytree[MAXNODE]) {
+    if (Mytree[0].LChild == -1 && Mytree[0].RChild == -1)
+        return 1;
+    return 0;
+}
+
+void Search(char key[], node Mytree[MAXNODE]) {
+    for (int i = 0;i < MAXNODE;i++) {
+        if (strcmp(Mytree[i].Name, key) == 0) {
+            printf("%s는 %d번째 인덱스에 존재합니다.\n", key, i);
+            return;
+        }
+    }
+    printf("%s는 트리에 존재하지 않습니다.\n", key);
+}
 
 void Traverse(int i, node Mytree[MAXNODE]) {
     if (strcmp(Mytree[i].Name, "UnUsed") != 0){

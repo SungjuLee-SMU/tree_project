@@ -117,6 +117,15 @@ Nptr create(int S[]) {
 	return Root;
 }
 
+void Destroy(Nptr T) {
+	if (T) {
+		Destroy(T->LChild);
+		Destroy(T->RChild);
+		T = NULL;
+		delete T;
+	}
+}
+
 int main() {
 	Nptr BT=NULL;
 	int S[10] = {6,4,8,3,5,7,9,1,2,10};
