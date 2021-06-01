@@ -3,13 +3,12 @@ using namespace std;
 #pragma warning(disable:4996)
 #define _CRT_SECURE_NO_WARNINGS 
 #define MAXNODE 100 
+
 typedef struct{ 
     char Name[50];
     int LChild;
     int RChild;
 } node;
-
-
 
 void CreateTree(node Mytree[MAXNODE]) {
     for (int i = 0; i < MAXNODE; i++) {
@@ -44,6 +43,34 @@ void CreateTree(node Mytree[MAXNODE]) {
     Mytree[5].RChild = -1;
 }
 
+void Destroy(int i, node Mytree[MAXNODE])
+{
+    Mytree[i].LChild = NULL;
+    Mytree[i].RChild = NULL;
+}
+
+void IsEmpty(node Mytree[MAXNODE])
+{
+    if (Mytree != NULL)
+        printf("비어있지 않음");
+    else
+        printf("비어있음");
+}
+
+void Search(char S[], node Mytree[MAXNODE])
+{
+    for (int i = 0; i < MAXNODE; i++)
+    {
+        if (strcmp(Mytree[i].Name, S) == 0)
+        {
+            printf(" %s 있음", S);
+        }
+        else
+            printf("없음");
+        //Search(Mytree[i].LChild, Mytree);
+        //Search(Mytree[i].RChild, Mytree);
+    }
+}
 
 void Traverse(int i, node Mytree[MAXNODE]) {
     if (strcmp(Mytree[i].Name, "UnUsed") != 0){
