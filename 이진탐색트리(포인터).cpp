@@ -1,6 +1,25 @@
 #include "이진탐색트리 포인터.h"
 #define SN 10;
 
+bool IsEmpty(Nptr T)
+{
+	if (T == NULL)
+	{
+		printf("Empty\n");
+		return true;
+	}
+	else
+	{
+		printf("No Empty\n");
+		return false;
+	}
+}
+
+void Destroy()
+{
+	Nptr Root = NULL;
+}
+
 Nptr Search(Nptr T, int Key)
 {
 	if (T == NULL) {
@@ -122,6 +141,8 @@ int main() {
 	int S[10] = {6,4,8,3,5,7,9,1,2,10};
 
 	BT = create(S);
+	cout << IsEmpty(BT) << endl;
+
 	PreOrder(BT);
 	cout << endl;
 
@@ -149,6 +170,8 @@ int main() {
 
 	InOrder(BT);
 	cout << endl;
+
+	Destroy();
 
 	return 0;
 }
