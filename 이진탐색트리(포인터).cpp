@@ -18,6 +18,7 @@ bool IsEmpty(Nptr T)
 void Destroy()
 {
 	Nptr Root = NULL;
+
 }
 
 Nptr Search(Nptr T, int Key)
