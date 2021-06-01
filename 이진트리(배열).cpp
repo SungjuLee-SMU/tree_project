@@ -73,15 +73,6 @@ bool IsEmpty(node Mytree[MAXNODE])
     }
 }
 
-/*void Destroy(int i, node Mytree[MAXNODE])
-{
-    if ((Mytree)->LChild != NULL)
-    {
-        Destroy((Mytree) ->LChild, Mytree);
-        (Mytree)->LChild = NULL;
-    }
-  */
-
 void Destroy(node Mytree[MAXNODE])
 {
     for (int i = 0; i < MAXNODE; i++)
