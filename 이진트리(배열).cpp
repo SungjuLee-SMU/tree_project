@@ -9,8 +9,6 @@ typedef struct{
     int RChild;
 } node;
 
-
-
 void CreateTree(node Mytree[MAXNODE]) {
     for (int i = 0; i < MAXNODE; i++) {
         strcpy(Mytree[i].Name, "UnUsed");
@@ -44,6 +42,28 @@ void CreateTree(node Mytree[MAXNODE]) {
     Mytree[5].RChild = -1;
 }
 
+void Destroy(node Mytree[MAXNODE]) {
+    for (int i = MAXNODE - 1; i >= 0; i--) {
+        strcpy(Mytree[i].Name, "UnUsed");
+        Mytree[i].LChild = -1;
+        Mytree[i].RChild = -1;
+    }
+}
+
+bool IsEmpty(node Mytree[MAXNODE]) {
+    if (strcmp(Mytree[0].Name, "UnUsed") == 0)
+        return true;
+    else
+        return false;
+}
+
+int Search(string n, node Mytree[MAXNODE]) {
+    for (int i = 0; Mytree[i].Name != "UnUsed"; i++) {
+        if (Mytree[i].Name == n)
+            return i;
+    }
+    return -1;
+}
 
 void Traverse(int i, node Mytree[MAXNODE]) {
     if (strcmp(Mytree[i].Name, "UnUsed") != 0){
@@ -61,6 +81,8 @@ int main() {
     node Mytree[MAXNODE];
     CreateTree(Mytree);
     Traverse(0, Mytree);
-
+    cout << IsEmpty(Mytree) << endl;
+    cout << Search("¹Ú", Mytree) << endl;
+    Destroy(Mytree);
     return 0;
 }

@@ -100,7 +100,7 @@ Nptr Insert(Nptr T, int Key)
 	else if (T->Data > Key)
 		T->LChild = Insert(T->LChild, Key);
 	else
-		T->RChild = INsert(T->RChild, Key);
+		T->RChild = Insert(T->RChild, Key);
 	return T;
 }
 
@@ -111,6 +111,13 @@ Nptr create(int S[]) {
 		Insert(Root, S[i]);
 	}
 	return Root;
+}
+
+void Destroy(Nptr T) {
+	for (int i = 1; i <= 10; i++) {
+		Delete(T, i);
+	}
+	delete T;
 }
 
 int main() {
@@ -145,6 +152,8 @@ int main() {
 
 	InOrder(BT);
 	cout << endl;
+
+	Destroy(BT);
 
 	return 0;
 }
