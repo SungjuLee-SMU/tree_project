@@ -100,6 +100,5 @@ int main() {
     node Mytree[MAXNODE];
     CreateTree(Mytree);
     Traverse(0, Mytree);
-
     return 0;
 }
