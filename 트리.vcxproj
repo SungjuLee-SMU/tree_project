@@ -139,7 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="G:\2021-2-1\자료구조\13주차\Project1\Project1\BynarySearchPointer.cpp" />
+    <ClCompile Include="G:\2021-2-1\자료구조\13주차\Project2\Project2\PriorityQueue.cpp" />
     <ClCompile Include="이진트리(배열).cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="G:\2021-2-1\자료구조\13주차\Project1\Project1\BynarySearchPointer.h" />
+    <ClInclude Include="G:\2021-2-1\자료구조\13주차\Project2\Project2\PriorityQueue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

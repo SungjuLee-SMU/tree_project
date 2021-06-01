@@ -44,6 +44,34 @@ void CreateTree(node Mytree[MAXNODE]) {
     Mytree[5].RChild = -1;
 }
 
+void Search(int key, node Mytree[MAXNODE]) {
+    int i;
+    for (i = 0; i < MAXNODE; i++) {
+        if (key == i)
+            break;
+    }
+
+    if (strcmp(Mytree[i].Name, "UnUsed") == 0)
+        cout << "No Record" << endl;
+    else
+        cout << Mytree[key].Name << endl;
+}
+
+bool IsEmpty(node Mytree[MAXNODE]) {
+    if (Mytree[0].Name == "Unused")
+        return true;
+    else return false;
+}
+
+void Destroy(node Mytree[MAXNODE]) {
+    for (int i = 0; i < MAXNODE; i++) {
+        strcpy(Mytree[i].Name, "UnUsed");
+        Mytree[i].LChild = -1;
+        Mytree[i].RChild = -1;
+    }
+
+    cout << "Destroy TreeRecord";
+}
 
 void Traverse(int i, node Mytree[MAXNODE]) {
     if (strcmp(Mytree[i].Name, "UnUsed") != 0){
