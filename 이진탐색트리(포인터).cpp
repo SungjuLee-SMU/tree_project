@@ -14,34 +14,39 @@ Nptr Search(Nptr T, int Key)
 	else
 		return Search(T->RChild, Key);
 }
-void PreOrder(Nptr T)
+void PreOrder(Nptr Root)
 {
-	if (T != NULL)
+	if (Root == NULL)
 	{
-		cout << T->Data << endl;
-		PreOrder(T->LChild);
-		PreOrder(T->RChild);
+		return;
 	}
+
+	cout << Root->Data << endl;
+	preorder(Root->LChild);
+	preorder(Root->RChild);
 }
 
-void InOrder(Nptr T)
+
+void InOrder(Nptr Root)
 {
-	if (T != NULL)
+	if (Root == NULL)
 	{
-		InOrder(T->LChild);
-		cout << T->Data << endl;
-		InOrder(T->RChild);
+		return;
 	}
+	inorder(Root->LChild);
+	cout << Root->Data << endl;
+	inorder(Root->RChild);
 }
 
-void PostOrder(Nptr T)
+void PostOrder(Nptr Root)
 {
-	if (T != NULL)
+	if (Root == NULL)
 	{
-		PostOrder(T->LChild);		
-		PostOrder(T->RChild);
-		cout << T->Data << endl;
+		return;
 	}
+	postorder(Root->LChild);
+	postorder(Root->RChild);
+	cout << Root->Data << endl;
 }
 
 void SuccessorCopy(Nptr &T, int& Key)
@@ -147,8 +152,7 @@ int main() {
 	PreOrder(BT);
 	cout << endl;
 
-	InOrder(BT);
-	cout << endl;
-
+	Nptr Root = create(S);
+	PostOrder(Root);
 	return 0;
 }
