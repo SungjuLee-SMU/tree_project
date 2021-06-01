@@ -91,6 +91,13 @@ void Delete(Nptr &T, int Key)
 	}
 }
 
+void Destroy(Nptr T) {
+	if (T != NULL) {
+		Destroy(T->LChild);
+		Destroy(T->RChild);
+		delete T;
+	}
+}
 
 Nptr Insert(Nptr T, int Key)
 {
@@ -149,6 +156,8 @@ int main() {
 
 	InOrder(BT);
 	cout << endl;
+
+	Destroy(BT);
 
 	return 0;
 }
