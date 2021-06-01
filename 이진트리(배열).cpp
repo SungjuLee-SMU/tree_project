@@ -100,5 +100,8 @@ int main() {
     node Mytree[MAXNODE];
     CreateTree(Mytree);
     Traverse(0, Mytree);
+    /*Search(3, Mytree);*/
+    IsEmpty(Mytree);
+    Destroy(Mytree);
     return 0;
 }

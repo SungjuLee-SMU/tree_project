@@ -127,6 +127,5 @@ int main() {
 	int S[10] = { 6,4,8,3,5,7,9,1,2,10 };
 
 	Nptr Root = create(S);
-
 	PreOrder(Root);
 }
