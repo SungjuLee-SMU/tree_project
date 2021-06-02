@@ -201,6 +201,5 @@ int main() {
 
 	cout << "Is queue empty? : " << IsEmpty(PQ) << endl;
 
-
 	return 0;
 }
