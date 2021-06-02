@@ -9,6 +9,7 @@ void PreOrder(Nptr T)
 		PreOrder(T->LChild);
 		PreOrder(T->RChild);
 	}
+
 }
 
 void SuccessorCopy(Nptr& T, int& Key)
