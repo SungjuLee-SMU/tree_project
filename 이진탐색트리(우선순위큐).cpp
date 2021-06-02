@@ -1,4 +1,4 @@
-#include"이진탐색트리 포인터.h"
+#include"이진트리 포인터.h"
 #define SN 10;
 
 void PreOrder(Nptr T)
@@ -9,7 +9,6 @@ void PreOrder(Nptr T)
 		PreOrder(T->LChild);
 		PreOrder(T->RChild);
 	}
-
 }
 
 void SuccessorCopy(Nptr& T, int& Key)
@@ -89,7 +88,7 @@ int LengthQueue(Nptr T) {
 	return count;
 }
 
-Qptr MakePriorityQueue() {
+Qptr Creat() {
 
 	PriorityQueue* PQ;
 	PQ = new PriorityQueue;
@@ -116,6 +115,7 @@ Nptr MinTree(Nptr T) {
 	return temp;
 
 }
+
 int Dequeue(Qptr PQ) {
 	Nptr min;
 	int tempKey = 0;
@@ -129,12 +129,34 @@ int Dequeue(Qptr PQ) {
 	return tempData;
 }
 
+void Destroy(Qptr PQ) {
+	while (PQ->Root != NULL) {
+		Dequeue(PQ);
+	}
+}
+
+void Add(Qptr PQ, int data) {
+	Nptr min;
+	min = MinTree(PQ->Root);
+	min->Data = data;
+}
+
+void Remove(Qptr PQ) {
+	Nptr min;
+	min = MinTree(PQ->Root);
+	min->Data = NULL;
+}
+
+bool IsEmpty(Qptr PQ) {
+	return PQ->Length == 0;
+}
+
 int main() {
 	PriorityQueue* PQ = NULL;
 	int Skey[10] = { 6,4,8,3,5,7,9,1,2,10 };
 	int SData[10] = { 60,40,80,30,50,70,90,10,20,100 };
 
-	PQ = MakePriorityQueue();
+	PQ = Creat();
 
 	Enqueue(PQ, 6, 60);
 	Enqueue(PQ, 4, 40);
@@ -151,20 +173,33 @@ int main() {
 	PreOrder(PQ->Root);
 	cout << endl;
 
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
-	cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
+	//cout << Dequeue(PQ) << endl;
 
-	cout << "전위순회 " << endl;
+	Add(PQ, 777);
+	cout << "전위순회 (Add 777)" << endl;
 	PreOrder(PQ->Root);
 	cout << endl;
+
+	Remove(PQ);
+	cout << "전위순회 (Remove 777)" << endl;
+	PreOrder(PQ->Root);
+	cout << endl;
+
+	Destroy(PQ);
+	cout << "전위순회 (Destroy)" << endl;
+	PreOrder(PQ->Root);
+	cout << endl;
+
+	cout << "Is queue empty? : " << IsEmpty(PQ) << endl;
 
 
 	return 0;
