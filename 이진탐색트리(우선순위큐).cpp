@@ -8,7 +8,7 @@ void PreOrder(Nptr T)
 		cout << T->Data << endl;
 		PreOrder(T->LChild);
 		PreOrder(T->RChild);
-	}
+	} 
 }
 
 void SuccessorCopy(Nptr& T, int& Key)
