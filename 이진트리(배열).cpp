@@ -93,6 +93,7 @@ void Traverse(int i, node Mytree[MAXNODE]) {
 
 int main() {
     char key[4] = "";
+
     node Mytree[MAXNODE];
     CreateTree(Mytree);
     Traverse(0, Mytree);
