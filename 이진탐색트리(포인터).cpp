@@ -3,16 +3,14 @@
 
 Nptr Search(Nptr T, int Key)
 {
-	if (T == NULL) {
-		printf("No Such Node");
-		return T;
+	while (T != NULL) {
+		if (T->Data == Key) return T;
+		else if (T->Data < Key)
+			T = T->RChild;
+		else
+			T = T->LChild;
 	}
-	else if (T->Data == Key)
-		return T;
-	else if (T->Data > Key)
-		return Search(T->LChild, Key);
-	else
-		return Search(T->RChild, Key);
+	cout << "no file" << endl;
 }
 void PreOrder(Nptr T)
 {
