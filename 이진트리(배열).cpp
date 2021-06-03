@@ -3,7 +3,7 @@ using namespace std;
 #pragma warning(disable:4996)
 #define _CRT_SECURE_NO_WARNINGS 
 #define MAXNODE 100 
-typedef struct{ 
+typedef struct {
     char Name[50];
     int LChild;
     int RChild;
@@ -14,8 +14,8 @@ typedef struct{
 void CreateTree(node Mytree[MAXNODE]) {
     for (int i = 0; i < MAXNODE; i++) {
         strcpy(Mytree[i].Name, "UnUsed");
-        Mytree[i].LChild=-1;
-        Mytree[i].RChild=-1;
+        Mytree[i].LChild = -1;
+        Mytree[i].RChild = -1;
     }
 
     strcpy(Mytree[0].Name, "±è");
@@ -30,13 +30,13 @@ void CreateTree(node Mytree[MAXNODE]) {
     strcpy(Mytree[3].Name, "ÃÖ");
     Mytree[3].LChild = 7;
     Mytree[3].RChild = -1;
-    strcpy(Mytree[4].Name, "Á¤");
+    strcpy(Mytree[4].Name, "ÀÓ");
     Mytree[4].LChild = -1;
     Mytree[4].RChild = -1;
-    strcpy(Mytree[5].Name, "°­");
+    strcpy(Mytree[5].Name, "Áø");
     Mytree[5].LChild = -1;
     Mytree[5].RChild = -1;
-    strcpy(Mytree[6].Name, "Á¶");
+    strcpy(Mytree[6].Name, "Âù");
     Mytree[5].LChild = -1;
     Mytree[5].RChild = -1;
     strcpy(Mytree[7].Name, "À±");
@@ -46,7 +46,7 @@ void CreateTree(node Mytree[MAXNODE]) {
 
 
 void Traverse(int i, node Mytree[MAXNODE]) {
-    if (strcmp(Mytree[i].Name, "UnUsed") != 0){
+    if (strcmp(Mytree[i].Name, "UnUsed") != 0) {
         cout << Mytree[i].Name << endl;
         if (Mytree[i].LChild != -1) {
             Traverse(Mytree[i].LChild, Mytree);
