@@ -3,16 +3,17 @@ using namespace std;
 #pragma warning(disable:4996)
 #define _CRT_SECURE_NO_WARNINGS 
 #define MAXNODE 100 
-typedef struct{ 
+typedef struct
+{ 
     char Name[50];
     int LChild;
     int RChild;
 } node;
 
-
-
-void CreateTree(node Mytree[MAXNODE]) {
-    for (int i = 0; i < MAXNODE; i++) {
+void CreateTree(node Mytree[MAXNODE]) 
+{
+    for (int i = 0; i < MAXNODE; i++)
+    {
         strcpy(Mytree[i].Name, "UnUsed");
         Mytree[i].LChild=-1;
         Mytree[i].RChild=-1;
@@ -45,22 +46,59 @@ void CreateTree(node Mytree[MAXNODE]) {
 }
 
 
-void Traverse(int i, node Mytree[MAXNODE]) {
-    if (strcmp(Mytree[i].Name, "UnUsed") != 0){
+void Traverse(int i, node Mytree[MAXNODE]) 
+{
+    if (strcmp(Mytree[i].Name, "UnUsed") != 0)
+    {
         cout << Mytree[i].Name << endl;
-        if (Mytree[i].LChild != -1) {
+        if (Mytree[i].LChild != -1) 
+        {
             Traverse(Mytree[i].LChild, Mytree);
         }
-        if (Mytree[i].RChild != -1) {
+        if (Mytree[i].RChild != -1)
+        {
             Traverse(Mytree[i].RChild, Mytree);
         }
     }
 }
+bool IsEmpty(node Mytree[MAXNODE])
+{
+    if (Mytree[0].Name == NULL)
+    {
+        cout << "Is Empty";
+    }
+    else
+    {
+        cout << "Is Not Empty";
+    }
+}
 
-int main() {
+void Destroy(node Mytree[MAXNODE])
+{
+    for (int i = 0; i < MAXNODE; i++)
+    {
+        strcpy(Mytree[i].Name, "UnUsed");
+        Mytree[i].LChild = -1;
+        Mytree[i].RChild = -1;
+    }
+}
+
+void Search(node Mytree[MAXNODE], char key[])
+{
+    for (int i = 0; i < MAXNODE; i++)
+    {
+        if (strcmp(Mytree[i].Name, key) == 0)
+        {
+            printf("Search: %s ", key);
+        }
+    }
+}
+int main() 
+{
     node Mytree[MAXNODE];
     CreateTree(Mytree);
     Traverse(0, Mytree);
-
+    IsEmpty(Mytree);
+    Destroy(Mytree);
     return 0;
 }

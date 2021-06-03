@@ -118,37 +118,14 @@ Nptr create(int S[]) {
 }
 
 int main() {
-	Nptr BT=NULL;
-	int S[10] = {6,4,8,3,5,7,9,1,2,10};
+	Nptr BT = NULL;
+	int S[10] = { 6,4,8,3,5,7,9,1,2,10 };
 
-	BT = create(S);
-	PreOrder(BT);
-	cout << endl;
-
-	InOrder(BT);
-	cout << endl;
-
-	PostOrder(BT);
-	cout << endl;
-
-	Delete(BT, 10);
-	PreOrder(BT);
-	cout << endl;
-
-	Delete(BT, 9);
-	PreOrder(BT);
-	cout << endl;
-
-	Delete(BT, 1);
-	PreOrder(BT);
-	cout << endl;
-
-	Delete(BT, 5);
-	PreOrder(BT);
-	cout << endl;
-
-	InOrder(BT);
-	cout << endl;
-
-	return 0;
+	Nptr Root = create(S);
+	printf("PreOrder\n");
+	PreOrder(Root); \
+	printf("\nInOrder\n");
+	InOrder(Root);
+	printf("\nPostOrder\n");
+	PostOrder(Root);
 }
