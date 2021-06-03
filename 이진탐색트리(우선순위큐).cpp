@@ -1,13 +1,29 @@
 #include "이진탐색트리 포인터.h"
 #define SN 10;
 
-void PreOrder(Nptr T)
+void PreOrder(Nptr Root)
 {
-	if (T != NULL)
+	if (Root == NULL)
 	{
-		cout << T->Data << endl;
-		PreOrder(T->LChild);
-		PreOrder(T->RChild);
+		return;
+	}
+
+	cout << Root->Data << endl;
+	PreOrder(Root->LChild);
+	PreOrder(Root->RChild);
+}
+
+bool IsEmpty(Qptr PQ)
+{
+	if (PQ == NULL)
+	{
+		printf("Is Empty");
+		return 1;
+	}
+	else
+	{
+		printf("Is Not Empty");
+		return 0;
 	}
 }
 
