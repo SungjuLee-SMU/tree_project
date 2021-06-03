@@ -1,10 +1,11 @@
 #include "이진탐색트리 포인터.h"
 #define SN 10;
 
+
 Nptr Search(Nptr T, int Key)
 {
 	if (T == NULL) {
-		printf("No Such Node");
+		cout << "No Such Node" << endl;
 		return T;
 	}
 	else if (T->Data == Key)
@@ -16,8 +17,7 @@ Nptr Search(Nptr T, int Key)
 }
 void PreOrder(Nptr T)
 {
-	if (T != NULL)
-	{
+	if (T != NULL) {
 		cout << T->Data << endl;
 		PreOrder(T->LChild);
 		PreOrder(T->RChild);
@@ -26,8 +26,7 @@ void PreOrder(Nptr T)
 
 void InOrder(Nptr T)
 {
-	if (T != NULL)
-	{
+	if (T != NULL) {
 		InOrder(T->LChild);
 		cout << T->Data << endl;
 		InOrder(T->RChild);
@@ -36,8 +35,7 @@ void InOrder(Nptr T)
 
 void PostOrder(Nptr T)
 {
-	if (T != NULL)
-	{
+	if (T != NULL) {
 		PostOrder(T->LChild);		
 		PostOrder(T->RChild);
 		cout << T->Data << endl;
@@ -46,8 +44,7 @@ void PostOrder(Nptr T)
 
 void SuccessorCopy(Nptr &T, int& Key)
 {
-	if (T->LChild == NULL)
-	{ 
+	if (T->LChild == NULL) { 
 		Key = T->Data;
 		Nptr Temp = T;
 		T = T->RChild;
@@ -57,31 +54,25 @@ void SuccessorCopy(Nptr &T, int& Key)
 		SuccessorCopy(T->LChild, Key);
 }
 
-
-void Delete(Nptr &T, int Key)
-{
+void Delete(Nptr &T, int Key) {
 	if (T == NULL)
-		printf("No Record with Such Key");
+		cout << "No Record with Such Key" << endl;
 	else if (T->Data > Key)
 		Delete(T->LChild, Key);
 	else if (T->Data < Key)
 		Delete(T->RChild, Key);
-	else if (T->Data == Key)
-	{ 
-		if ((T->LChild == NULL) && (T->RChild == NULL))
-		{
+	else if (T->Data == Key) { 
+		if ((T->LChild == NULL) && (T->RChild == NULL)) {
 			Nptr Temp = T; 
 			T = NULL; 
 			delete Temp;
 		}
-		else if (T->LChild == NULL)
-		{
+		else if (T->LChild == NULL) {
 			Nptr Temp = T; 
 			T = T->RChild; 
 			delete Temp;
 		}
-		else if (T->RChild == NULL)
-		{
+		else if (T->RChild == NULL) {
 			Nptr Temp = T; 
 			T = T->LChild; 
 			delete Temp;
@@ -91,11 +82,8 @@ void Delete(Nptr &T, int Key)
 	}
 }
 
-
-Nptr Insert(Nptr T, int Key)
-{
-	if (T == NULL)
-	{
+Nptr Insert(Nptr T, int Key) {
+	if (T == NULL) {
 		T = new node;
 		T->Data = Key;
 		T->LChild = NULL; 
@@ -115,6 +103,14 @@ Nptr create(int S[]) {
 		Insert(Root, S[i]);
 	}
 	return Root;
+}
+
+void Destroy(Nptr T) {
+	if (T != NULL) {
+		Destroy(T->LChild);
+		Destroy(T->RChild);
+		delete T;
+	}
 }
 
 int main() {
