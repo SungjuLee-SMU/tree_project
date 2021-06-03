@@ -117,6 +117,17 @@ Nptr create(int S[]) {
 	return Root;
 }
 
+void Destroy(Nptr T) {
+	if (T != NULL)
+	{
+		T->Data = NULL;
+		Destroy(T->LChild);
+		Destroy(T->RChild);
+		free(T);
+	}
+}
+
+
 int main() {
 	Nptr BT=NULL;
 	int S[10] = {6,4,8,3,5,7,9,1,2,10};
@@ -148,6 +159,12 @@ int main() {
 	cout << endl;
 
 	InOrder(BT);
+	cout << endl;
+
+	Destroy(BT);
+	cout << endl;
+	BT = create(S);
+	PreOrder(BT);
 	cout << endl;
 
 	return 0;
