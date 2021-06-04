@@ -117,6 +117,7 @@ Nptr create(int S[]) {
 	return Root;
 }
 
+
 int main() {
 	Nptr BT=NULL;
 	int S[10] = {6,4,8,3,5,7,9,1,2,10};
