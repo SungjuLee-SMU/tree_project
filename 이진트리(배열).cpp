@@ -3,21 +3,21 @@ using namespace std;
 #pragma warning(disable:4996)
 #define _CRT_SECURE_NO_WARNINGS 
 #define MAXNODE 100 
-typedef struct{ 
+
+typedef struct {
     char Name[50];
     int LChild;
     int RChild;
 } node;
 
-
-
-void CreateTree(node Mytree[MAXNODE]) {
-    for (int i = 0; i < MAXNODE; i++) {
+void Create(node Mytree[MAXNODE])
+{
+    for (int i = 0; i < MAXNODE; i++)
+    {
         strcpy(Mytree[i].Name, "UnUsed");
-        Mytree[i].LChild=-1;
-        Mytree[i].RChild=-1;
+        Mytree[i].LChild = -1;
+        Mytree[i].RChild = -1;
     }
-
     strcpy(Mytree[0].Name, "김");
     Mytree[0].LChild = 1;
     Mytree[0].RChild = 2;
@@ -44,9 +44,40 @@ void CreateTree(node Mytree[MAXNODE]) {
     Mytree[5].RChild = -1;
 }
 
+void Destory(node Mytree[MAXNODE])
+{
+    for (int i = 0; i < MAXNODE; i++)
+    {
+        strcpy(Mytree[i].Name, "UnUsed");
+        Mytree[i].LChild = -1;
+        Mytree[i].RChild = -1;
+    }
+}
+
+void Search(string n, node Mytree[MAXNODE])
+{
+    for (int i = 0; Mytree[i].Name != "UnUsed"; i++)
+    {
+        if (Mytree[i].Name == n)
+        {
+            printf("찾는 성의 인덱스: %d\n", i);
+            return;
+        }
+
+    }
+    printf("없음\n");
+}
+
+
+bool IsEmpty(node Mytree[MAXNODE]) {
+    if (strcmp(Mytree[0].Name, "UnUsed") == 1)
+        return true;
+
+    return false;
+}
 
 void Traverse(int i, node Mytree[MAXNODE]) {
-    if (strcmp(Mytree[i].Name, "UnUsed") != 0){
+    if (strcmp(Mytree[i].Name, "UnUsed") != 0) {
         cout << Mytree[i].Name << endl;
         if (Mytree[i].LChild != -1) {
             Traverse(Mytree[i].LChild, Mytree);
@@ -57,9 +88,15 @@ void Traverse(int i, node Mytree[MAXNODE]) {
     }
 }
 
-int main() {
+int main()
+{
     node Mytree[MAXNODE];
-    CreateTree(Mytree);
+    Create(Mytree);
+
+    Search("최", Mytree);
+
+    cout << "IsEmpty:" << IsEmpty(Mytree) << endl;
+
     Traverse(0, Mytree);
 
     return 0;

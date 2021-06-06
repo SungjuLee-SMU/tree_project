@@ -3,6 +3,7 @@
 
 Nptr Search(Nptr T, int Key)
 {
+
 	if (T == NULL) {
 		printf("No Such Node");
 		return T;
@@ -16,6 +17,7 @@ Nptr Search(Nptr T, int Key)
 }
 void PreOrder(Nptr T)
 {
+
 	if (T != NULL)
 	{
 		cout << T->Data << endl;
@@ -26,6 +28,7 @@ void PreOrder(Nptr T)
 
 void InOrder(Nptr T)
 {
+
 	if (T != NULL)
 	{
 		InOrder(T->LChild);
@@ -36,18 +39,20 @@ void InOrder(Nptr T)
 
 void PostOrder(Nptr T)
 {
+
 	if (T != NULL)
 	{
-		PostOrder(T->LChild);		
+		PostOrder(T->LChild);
 		PostOrder(T->RChild);
 		cout << T->Data << endl;
 	}
 }
 
-void SuccessorCopy(Nptr &T, int& Key)
+void SuccessorCopy(Nptr& T, int& Key)
 {
+
 	if (T->LChild == NULL)
-	{ 
+	{
 		Key = T->Data;
 		Nptr Temp = T;
 		T = T->RChild;
@@ -58,8 +63,9 @@ void SuccessorCopy(Nptr &T, int& Key)
 }
 
 
-void Delete(Nptr &T, int Key)
+void Delete(Nptr& T, int Key)
 {
+
 	if (T == NULL)
 		printf("No Record with Such Key");
 	else if (T->Data > Key)
@@ -67,38 +73,39 @@ void Delete(Nptr &T, int Key)
 	else if (T->Data < Key)
 		Delete(T->RChild, Key);
 	else if (T->Data == Key)
-	{ 
+	{
 		if ((T->LChild == NULL) && (T->RChild == NULL))
 		{
-			Nptr Temp = T; 
-			T = NULL; 
+			Nptr Temp = T;
+			T = NULL;
 			delete Temp;
 		}
 		else if (T->LChild == NULL)
 		{
-			Nptr Temp = T; 
-			T = T->RChild; 
+			Nptr Temp = T;
+			T = T->RChild;
 			delete Temp;
 		}
 		else if (T->RChild == NULL)
 		{
-			Nptr Temp = T; 
-			T = T->LChild; 
+			Nptr Temp = T;
+			T = T->LChild;
 			delete Temp;
 		}
 		else
-		   SuccessorCopy(T->RChild, T->Data);
+			SuccessorCopy(T->RChild, T->Data);
 	}
 }
 
 
 Nptr Insert(Nptr T, int Key)
 {
+
 	if (T == NULL)
 	{
 		T = new node;
 		T->Data = Key;
-		T->LChild = NULL; 
+		T->LChild = NULL;
 		T->RChild = NULL;
 	}
 	else if (T->Data > Key)
@@ -114,41 +121,33 @@ Nptr create(int S[]) {
 	for (int i = 1; i < 10; i++) {
 		Insert(Root, S[i]);
 	}
+
 	return Root;
 }
 
 int main() {
-	Nptr BT=NULL;
-	int S[10] = {6,4,8,3,5,7,9,1,2,10};
-
+	Nptr BT = NULL;
+	int S[10] = { 6,4,8,3,5,7,9,1,2,10 };
 	BT = create(S);
 	PreOrder(BT);
 	cout << endl;
-
 	InOrder(BT);
 	cout << endl;
-
 	PostOrder(BT);
 	cout << endl;
-
 	Delete(BT, 10);
 	PreOrder(BT);
 	cout << endl;
-
 	Delete(BT, 9);
 	PreOrder(BT);
 	cout << endl;
-
 	Delete(BT, 1);
 	PreOrder(BT);
 	cout << endl;
-
 	Delete(BT, 5);
 	PreOrder(BT);
 	cout << endl;
-
 	InOrder(BT);
 	cout << endl;
-
 	return 0;
 }
